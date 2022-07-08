@@ -3,9 +3,9 @@
 """
 
 
-from matplotlib.pyplot import get
 import pandas as pd
 from datetime import datetime
+import datetime as dt_time
 import logging
 
 
@@ -142,13 +142,76 @@ def create_appointment(patient_name, doctor_name, date, time, df_doctor, df_pati
         patient_name, datetime_object, 'patient')
 
     if(len(doctor_apps) > 0):
-        doctor_apps = doctor_apps.sort_values(by='appointment_datetime')
+        for _, row in doctor_apps.iterrows():
+            if(row['appointment_datetime'] - datetime_object < dt_time.timedelta(minutes=60)):
+                logging.error(
+                    "Doctor is not available on the given date and time")
+                return False
+    if(len(patient_apps) > 0):
+        for _, row in patient_apps.iterrows():
+            if(row['appointment_datetime'] - datetime_object < dt_time.timedelta(minutes=60)):
+                logging.error(
+                    "Patient is not available on the given date and time")
+                return False
 
     appointment_id = 'A' + doctor_id + patient_id + \
         datetime_object.strftime('%y%m%d%H')
     df_appointments = df_appointments.append(
         {'doctor_id': doctor_id, 'patient_id': patient_id, 'appointment_id': appointment_id, 'appointment_datetime': datetime_object}, ignore_index=True)
     return True
+
+
+def cancel_appointment(doctor_name=None, patient_name=None, date=None, time=None):
+    """
+        Function to cancel an appointment
+    """
+    global df_appointments
+    global df_doctors
+    global df_patients
+
+    if(doctor_name is None and patient_name is None):
+        logging.error("Invalid appointment details")
+        return False
+
+    if(doctor_name is not None):
+        try:
+            doctor_id = df_doctors[df_doctors['name']
+                                   == doctor_name]['id'].values[0]
+        except:
+            logging.error(' Doctor not found')
+            return False
+        appointments = get_appointments(
+            doctor_name, date, 'doctor')
+
+        if(len(appointments) == 0):
+            logging.error("No appointments found")
+            return False
+        for _, row in appointments.iterrows():
+            if(row['appointment_datetime'].strftime('%H:%M:%S') == time):
+                df_appointments = df_appointments[df_appointments['appointment_id']
+                                                  != row['appointment_id']]
+                return True
+        logging.error("No appointments found")
+        return False
+    elif(patient_name is not None):
+        try:
+            patient_id = df_patients[df_patients['name']
+                                     == patient_name]['id'].values[0]
+        except:
+            logging.error(' Patient not found')
+            return False
+        appointments = get_appointments(
+            patient_name, date, 'patient')
+        if(len(appointments) == 0):
+            logging.error("No appointments found")
+            return False
+        for _, row in appointments.iterrows():
+            if(row['appointment_datetime'].strftime('%H:%M:%S') == time):
+                df_appointments = df_appointments[df_appointments['appointment_id']
+                                                  != row['appointment_id']]
+                return True
+        logging.error("No appointments found")
+        return False
 
 
 if __name__ == '__main__':
@@ -174,8 +237,16 @@ if __name__ == '__main__':
     df_appointments = df.drop(['doctor_name', 'patient_name',
                                'patient_gender', 'patient_age'], axis=1)
 
-    print(get_appointments('D1Name', "2018-03-08", 'doctor'))
+   # print(get_appointments('D1Name', "2018-03-08", 'doctor'))
 
-    # if(create_appointment('P3Name', 'D1Name', '2022-04-03',
-    #                       '15:00:00', df_doctors, df_patients)):
-    #     print("Appointment created")
+    if(create_appointment('P3Name', 'D1Name', '2022-04-03',
+                          '15:00:00', df_doctors, df_patients)):
+        print("Appointment created")
+
+    if(create_appointment('P3Name', 'D1Name', '2022-04-03',
+                          '14:00:00', df_doctors, df_patients)):
+        print("Appointment created")
+    print(get_appointments('D1Name', "2022-04-03", 'doctor'))
+    if(cancel_appointment('D1Name', None, "2022-04-03", '15:00:00')):
+        print("Appointment cancelled")
+    print(get_appointments('D1Name', "2022-04-03", 'doctor'))
