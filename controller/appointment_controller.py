@@ -8,6 +8,29 @@ import logging
 
 
 class AppointmentController:
+    def get_appointments(self, name, date, entity_type):
+        """
+            Function to get appointments for a given entity
+        """
+        datetime_object = date
+        if(type(date) == str):
+            datetime_object = datetime.strptime(date, '%Y-%m-%d')
+
+        id = ''
+
+        if(entity_type == 'doctor'):
+            id = [
+                doctor.doctor_id for doctor in DoctorList.list_docs if doctor.doctor_name == name][0]
+            appointments = [appointment for appointment in AppointmentList.list_appointments if appointment.doctor_id ==
+                            id and appointment.time.date() == datetime_object.date()]
+        else:
+            id = [
+                patient.patient_id for patient in PatientList.list_patients if patient.patient_name == name][0]
+
+            appointments = [appointment for appointment in AppointmentList.list_appointments if appointment.patient_id ==
+                            id and appointment.time.date() == datetime_object.date()]
+        return appointments
+
     def create_appointment(self, date, time, doctor_name, patient_name):
         """
             Function to create an appointment
@@ -25,6 +48,7 @@ class AppointmentController:
 
         try:
             list_of_doctors = DoctorList().list_docs
+
             doctor_id = [
                 doctor.doctor_id for doctor in list_of_doctors if doctor.doctor_name == doctor_name][0]
         except:
@@ -33,17 +57,16 @@ class AppointmentController:
 
         try:
             list_of_patients = PatientList().list_patients
+
             patient_id = [
                 patient.patient_id for patient in list_of_patients if patient.patient_name == patient_name][0]
         except:
             logging.error(' Patient not found')
             return False
 
-        AppointmentDB = AppointmentList()
-        # Check if the doctor is available on the given date and time
-        doctor_apps = AppointmentDB.get_appointments(
+        doctor_apps = self.get_appointments(
             doctor_name, datetime_object, 'doctor')
-        patient_apps = AppointmentDB.get_appointments(
+        patient_apps = self.get_appointments(
             patient_name, datetime_object, 'patient')
 
         if(len(doctor_apps) > 0):
@@ -61,9 +84,8 @@ class AppointmentController:
 
         appointment_id = 'A' + doctor_id + patient_id + \
             datetime_object.strftime('%y%m%d%H')
-        AppointmentList().list_appointments.append(Appointment(appointment_id,
-                                                               doctor_id, patient_id, datetime_object))
-
+        AppointmentList.list_appointments.append(Appointment(appointment_id,
+                                                             doctor_id, patient_id, datetime_object))
         return True
 
     def cancel_appointment(self, doctor_name=None, patient_name=None, date=None, time=None):
@@ -88,15 +110,14 @@ class AppointmentController:
                 logging.error(' Doctor not found')
                 return False
 
-            appointments = AppointmentList()
-            same_day_apps = appointments.get_appointments(
+            same_day_apps = self.get_appointments(
                 doctor_name, date, 'doctor')
             if not same_day_apps:
                 logging.error("No appointments found")
                 return False
 
             for app in same_day_apps:
-                if app.appointment_datetime.strftime('%H:%M:%S') == time:
+                if app.time.strftime('%H:%M:%S') == time:
                     AppointmentList.list_appointments.remove(app)
                     return True
             logging.error("No appointments found")
@@ -111,8 +132,7 @@ class AppointmentController:
                 logging.error(' Patient not found')
                 return False
 
-            appointments = AppointmentList()
-            same_day_apps = appointments.get_appointments(
+            same_day_apps = self.get_appointments(
                 patient_name, date, 'patient')
             if not same_day_apps:
                 logging.error("No appointments found")

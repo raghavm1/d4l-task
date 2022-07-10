@@ -14,6 +14,7 @@ class Appointment:
             This function aids in the creation of a dataframe
         """
         return {
+            'appointment_id': self.appointment_id,
             'doctor_id': self.doctor_id,
             'patient_id': self.patient_id,
             'appointment_datetime': self.time
