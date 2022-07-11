@@ -1,4 +1,6 @@
 from pydoc import Doc
+import json
+
 from entities.doctor import Doctor
 import pandas as pd
 
@@ -24,4 +26,4 @@ class DoctorList:
         """
         for doctor in DoctorList.list_docs:
             if doctor.doctor_id == doctor_id:
-                print(doctor.to_dict())
+                return json.dumps(doctor.to_dict())
