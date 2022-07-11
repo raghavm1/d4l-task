@@ -8,6 +8,10 @@ First, we need to install all dependencies.
 In the root directory, run -
 `pip install -r requirements.txt`
 
+## Why a REST API?
+
+As I was solving this problem, I realised how in a proper setting this can be advantageous as a REST API. Any kind of a frontend - be it a web app or a mobile app can utilise it. Also, I added functionality to various endpoints via URL params because while I did my testing and debugging using Postman, this API can be used from any browser.
+
 ## Q1. Entities and Relations
 
 Here, there are 3 entities -
