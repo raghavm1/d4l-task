@@ -19,11 +19,3 @@ class DoctorList:
         for _, row in self.df_docs.iterrows():
             DoctorList.list_docs.append(
                 Doctor(row['doctor_id'], row['doctor_name']))
-
-    def print_doctor_details(self, doctor_id):
-        """
-            Function to print details of a doctor
-        """
-        for doctor in DoctorList.list_docs:
-            if doctor.doctor_id == doctor_id:
-                return json.dumps(doctor.to_dict())

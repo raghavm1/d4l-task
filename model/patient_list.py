@@ -1,6 +1,5 @@
 from entities.patient import Patient
 import pandas as pd
-import os
 
 
 class PatientList:
