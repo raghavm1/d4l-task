@@ -55,7 +55,7 @@ For example, getting appointments by entity_type is done as `http://localhost:50
     - URL parameters
         - name
         - date
-        - entity_type
+        - entity_type (doctor/patient)
     <br>
 
 3. (Q3) Creating an appointment
@@ -67,7 +67,7 @@ For example, getting appointments by entity_type is done as `http://localhost:50
         - date
         - time
         - doctor_name
-        - patient_name
+        - patient_name 
     <br>
 
 4. (Q4) Cancelling an appointment
@@ -86,7 +86,7 @@ For example, getting appointments by entity_type is done as `http://localhost:50
     - URL parameters
         - date
         - id
-        - entity_type
+        - entity_type (doctor/patient)
     <br>
 6. Get all doctor details by ID
 
