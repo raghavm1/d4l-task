@@ -127,3 +127,10 @@ This app has 4 endpoints in total -
     <br>
 13. View all patients
     `/api/get/patients`
+
+
+### Further improvements and future work
+
+- Currently appointment details can be retrieved by name instead of ID. This was made to make the program more user-friendly, and if this product is client-facing. However, if one would use this API as an admin, retreival by ID would be better. To showcase this, I have retreived all patient and doctor details via IDs only, since these can be typically tasks done by an administrator and not a general user.
+
+Another way of having useful IDs could be like a person having NRICs or FINs for identification. In that case, using IDs can be better.
