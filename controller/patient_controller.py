@@ -26,7 +26,6 @@ class PatientController:
             Create a new doctor detail
         """
         name = request.args.get("name")
-        id = request.args.get("id")
         gender = request.args.get("gender")
         age = request.args.get("age")
 

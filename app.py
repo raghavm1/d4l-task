@@ -18,16 +18,19 @@ ac = AppointmentController()
 dc = DoctorController()
 pc = PatientController()
 
-
+# create appointment
 app.add_endpoint('/api/add',
                  'add_app', ac.create_appointment, methods=['POST'])
 
+# cancel appointment
 app.add_endpoint('/api/cancel',
                  'cancel_app', ac.cancel_appointment, methods=['DELETE'])
 
+# get appointment by doctor/patient name
 app.add_endpoint('/api/get',
                  'get_doc_appointments', ac.get_appointments)
 
+# get all appointments
 app.add_endpoint('/api/all', 'get_all_appointments', ac.get_all_appointments)
 
 # extra endpoint to fetch via ID
