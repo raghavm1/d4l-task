@@ -75,7 +75,7 @@ This app has 4 endpoints in total -
         - patient_name _(optional if doctor_name is given)_
         - date (in YYYY-MM-DD format)
         - time (in HH-MM-00 format)
-<br>
+    <br>
 5. Fetch appointments by either doctor or patient ID
 
     `/api/get_by_id`
@@ -83,19 +83,19 @@ This app has 4 endpoints in total -
         - date
         - id
         - entity_type
-<br>
+    <br>
 6. Get all doctor details by ID
 
     `/api/get/doctor`
     - URL parameters
         - id
-<br>
+    <br>
 7. Add a new doctor 
 
     `/api/add/doctor`
     - URL parameters
         - name
-<br>
+    <br>
 8. Delete doctor by ID
 
     `/api/delete/doctor`
@@ -107,7 +107,7 @@ This app has 4 endpoints in total -
     `/api/get/patient`
     - URL parameters
         - id
-<br>
+    <br>
 10. Add patient
 
     `/api/add/patient`
@@ -115,15 +115,15 @@ This app has 4 endpoints in total -
         - name
         - gender
         - age
-<br>
+    <br>
 11. Delete patient
 
     `/api/delete/patient`
     - URL parameters
         - id
-<br>
+    <br>
 12. View all doctors
     `/api/get/doctors`
-<br>
+    <br>
 13. View all patients
     `/api/get/patients`
