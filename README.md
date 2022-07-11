@@ -35,7 +35,11 @@ Run the command `python app.py` to get started. This will keep the application r
 
 ## Using the app (Documentation)
 
-This app has 4 endpoints in total -
+This app has 13 endpoints in total -
+
+URL parameters are used as follows-  
+
+For example, getting appointments by doctor_name is done as `http://localhost:5000/api/get?name=<name>&date=<date>&entity_type=<entity_type>`
 
 1. Getting all appointments
 
