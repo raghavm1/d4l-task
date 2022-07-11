@@ -37,6 +37,12 @@ Run the command `python app.py` to get started. This will keep the application r
 
 This app has 13 endpoints in total.
 
+Here are set value formats for some of the parameters
+
+1. entity_type - either `doctor` or `patient`
+2. date - in YYYY-MM-DD format
+3. time - in HH-MM-SS format
+
 URL parameters are used as follows-  
 
 For example, getting appointments by entity_type is done as `http://localhost:5000/api/get?name=<name>&date=<date>&entity_type=<entity_type>`
