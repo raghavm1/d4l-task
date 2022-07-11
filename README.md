@@ -2,6 +2,12 @@
 
 This is a REST API created using Flask. This application is developed using Python in MVC architecture.
 
+## Setup
+
+First, we need to install all dependencies.
+In the root directory, run -
+`pip install -r requirements.txt`
+
 ## Q1. Entities and Relations
 
 Here, there are 3 entities -
@@ -16,12 +22,6 @@ Here, the Doctors work on/have appointments, and the working on/having is the re
 Similarly, patients attend to appointments to get cured.
 
 There is a 1:M relationship between Doctors and Appointments, as well as Patient and appointments.
-
-## Setup
-
-First, we need to install all dependencies.
-In the root directory, run -
-`pip install -r requirements.txt`
 
 ### Run the app
 
