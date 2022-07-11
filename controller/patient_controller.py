@@ -1,6 +1,5 @@
 from flask import request
 from flask import jsonify
-from entities import appointment
 from model.appointment_list import AppointmentList
 from model.patient_list import PatientList
 from entities.patient import Patient
@@ -10,7 +9,7 @@ import uuid
 class PatientController:
     def get_all_patients(self):
         """
-            Get details of all doctors
+            Get details of all patients
         """
         return jsonify([patient.to_dict() for patient in PatientList.list_patients])
 
@@ -23,7 +22,7 @@ class PatientController:
 
     def create_patient(self):
         """
-            Create a new doctor detail
+            Create a new patient detail
         """
         name = request.args.get("name")
         gender = request.args.get("gender")
@@ -32,9 +31,9 @@ class PatientController:
         PatientList.list_patients.append(
             Patient(patient_name=name, patient_id=uuid.uuid1(), patient_gender=gender, patient_age=age))
 
-    def delete_doctor(self):
+    def delete_patient(self):
         """
-            Delete doctor details
+            Delete patient details
         """
         id = request.args.get("id")
         for patient in PatientList.list_patients:

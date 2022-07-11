@@ -94,7 +94,7 @@ This app has 4 endpoints in total -
 
     `/api/delete/doctor`
     - URL parameters
-        - name
+        - id
     <br>
 9. Get patient details by ID
 

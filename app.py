@@ -57,7 +57,7 @@ app.add_endpoint('/api/add/patient', 'add_patient',
 
 # delete patient by ID
 app.add_endpoint('/api/delete/patient', 'delete_patient',
-                 dc.delete_doctor, methods=['DELETE'])
+                 pc.delete_patient, methods=['DELETE'])
 
 # view all doctors
 app.add_endpoint('/api/get/doctors', 'get_all_docs', dc.get_all_doctors)
