@@ -35,7 +35,7 @@ Run the command `python app.py` to get started. This will keep the application r
 
 ## Using the app (Documentation)
 
-This app has 13 endpoints in total -
+This app has 13 endpoints in total.
 
 URL parameters are used as follows-  
 
