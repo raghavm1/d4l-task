@@ -135,5 +135,3 @@ This app has 4 endpoints in total -
 Another way of having useful IDs could be like a person having NRICs or FINs for identification. In that case, using IDs can be better even in client-facing apps.
 
 - Having a DB or dataframes for facilitating quick retrieval when filtering patient/doctor details. (use of dataframes is done on the df-approach branch)
-
-- Creating a frontend application...
