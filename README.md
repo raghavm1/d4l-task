@@ -1,6 +1,6 @@
 # About
 
-This is a REST API created using Flask. This application is developed using Python in MVC architecture.
+This is a REST API created using Flask. This application is developed using Python utilising the MVC design pattern.
 
 ## Setup
 
